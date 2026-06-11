@@ -3,164 +3,154 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>You're Qualified! — DailyClaimIt</title>
+  <title>You're In — Check Your Email</title>
+  <meta name="robots" content="noindex" />
 
-  <!-- Auto-redirect to MaxBounty offer after 4 seconds -->
-  <meta http-equiv="refresh" content="4;url=https://afflat3e1.com/trk/lnk/0333AF69-53A4-4060-B664-61FBCC429F4E/?o=24725&c=918277&a=780205&k=6C429903C034D434CB30EFBDFB16098C&l=25813" />
-
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-
-  <!-- Microsoft Clarity — paste your snippet here when ready -->
-  <!--
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "YOUR_CLARITY_ID");
-  </script>
-  -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,800;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --pink-light: #fce8ef;
-      --pink-mid: #f4c0d1;
-      --pink-strong: #d4537e;
-      --pink-dark: #993556;
-      --pink-deep: #4B1528;
-      --text-body: #72243E;
-      --white: #ffffff;
+      --blush-1: #FDEFF3;
+      --blush-2: #F8D6E0;
+      --ink: #1C1419;
+      --rose-deep: #C04A72;
+      --wine: #722441;
+      --gold: #E8B563;
+      --white: #FFFFFF;
     }
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--pink-light);
-      color: var(--text-body);
+      background: linear-gradient(165deg, var(--blush-1) 0%, var(--blush-2) 100%);
+      color: var(--wine);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      text-align: center;
     }
+    .header { padding: 18px 24px; text-align: center; }
     .header-logo {
       font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--pink-strong);
-      margin-bottom: 40px;
+      font-size: 19px; font-weight: 600; letter-spacing: .04em; color: var(--ink);
     }
-    .header-logo span { color: var(--pink-deep); }
-    .check-circle {
-      width: 80px;
-      height: 80px;
-      background: var(--pink-strong);
-      border-radius: 50%;
+    .header-logo em { font-style: italic; color: var(--rose-deep); }
+
+    main {
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 28px;
+      padding: 24px;
     }
-    .check-circle svg { width: 40px; height: 40px; }
+    .card {
+      background: var(--white);
+      border-radius: 22px;
+      box-shadow: 0 24px 60px rgba(170,70,105,.16);
+      max-width: 480px;
+      width: 100%;
+      padding: 44px 36px;
+      text-align: center;
+      position: relative;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 36px; right: 36px;
+      height: 4px;
+      border-radius: 0 0 6px 6px;
+      background: linear-gradient(90deg, var(--gold), #E2638C, var(--gold));
+    }
+    .check {
+      width: 64px; height: 64px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #FBD0DD, #E98BAB);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 30px;
+      box-shadow: inset 0 2px 3px rgba(255,255,255,.9), 0 8px 22px rgba(190,80,120,.3);
+    }
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(28px, 5vw, 42px);
-      font-weight: 700;
-      color: var(--pink-deep);
-      margin-bottom: 16px;
-      line-height: 1.2;
+      font-weight: 800;
+      font-size: 32px;
+      color: var(--ink);
+      margin-bottom: 12px;
     }
-    p {
-      font-size: 16px;
-      line-height: 1.7;
-      color: var(--text-body);
-      max-width: 440px;
-      margin: 0 auto 32px;
+    h1 em { font-style: italic; font-weight: 400; color: var(--rose-deep); }
+    p { font-size: 15px; line-height: 1.7; margin-bottom: 10px; }
+    .steps {
+      text-align: left;
+      background: #FDF3F6;
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin: 22px 0 6px;
+      font-size: 14px;
+      line-height: 1.6;
     }
-    .redirect-note {
-      font-size: 13px;
-      color: var(--pink-dark);
-      margin-bottom: 24px;
-    }
-    .progress-bar-wrap {
-      width: 280px;
-      height: 6px;
-      background: var(--pink-mid);
-      border-radius: 3px;
-      margin: 0 auto 32px;
-      overflow: hidden;
-    }
-    .progress-bar-fill {
-      height: 100%;
-      background: var(--pink-strong);
-      border-radius: 3px;
-      animation: fillBar 4s linear forwards;
-    }
-    @keyframes fillBar {
-      from { width: 0%; }
-      to { width: 100%; }
-    }
-    .manual-link {
-      font-size: 13px;
-      color: var(--pink-dark);
-    }
-    .manual-link a {
-      color: var(--pink-strong);
-      font-weight: 600;
-      text-decoration: underline;
-    }
+    .steps b { color: var(--ink); }
     .footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
       text-align: center;
-      padding: 16px;
+      padding: 22px;
       font-size: 11px;
-      color: #b07090;
-      border-top: 1px solid var(--pink-mid);
-      background: var(--pink-light);
+      color: #A66983;
+      line-height: 1.7;
     }
-    .footer a { color: var(--pink-strong); text-decoration: none; }
   </style>
 </head>
 <body>
+  <header class="header">
+    <div class="header-logo">daily<em>claim</em>it</div>
+  </header>
 
-  <div class="header-logo">daily<span>claim</span>it</div>
-
-  <div class="check-circle" aria-hidden="true">
-    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8 20L16 28L32 12" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </div>
-
-  <h1>You're qualified!</h1>
-
-  <p>Great news — tester kits are available in your area. We're taking you to the next step now to confirm your selection and shipping details.</p>
-
-  <div class="redirect-note">Redirecting you in a moment...</div>
-
-  <div class="progress-bar-wrap">
-    <div class="progress-bar-fill"></div>
-  </div>
-
-  <div class="manual-link">
-    Not redirected? <a href="https://afflat3e1.com/trk/lnk/0333AF69-53A4-4060-B664-61FBCC429F4E/?o=24725&c=918277&a=780205&k=6C429903C034D434CB30EFBDFB16098C&l=25813">Click here to continue →</a>
-  </div>
+  <main>
+    <div class="card">
+      <div class="check">✓</div>
+      <h1>You're <em>in!</em></h1>
+      <p>Your tester application was received. We just sent your kit details to your inbox.</p>
+      <div class="steps">
+        <b>What happens next:</b><br>
+        1. Open the email from DailyClaimIt (check spam/promotions too)<br>
+        2. Confirm your details to lock in your spot<br>
+        3. Follow the steps inside to complete your claim
+      </div>
+      <p style="font-size:12px; color:#A66983;">Spots are confirmed in the order applications are received.</p>
+    </div>
+  </main>
 
   <footer class="footer">
-    <p>&copy; 2026 DailyClaimIt &nbsp;|&nbsp; <a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Terms</a></p>
+    <p>&copy; 2026 DailyClaimIt — Participation may be required to receive a kit. See offer terms.</p>
   </footer>
 
-  <!-- JS redirect as backup (more reliable than meta refresh) -->
+  <!-- ───────────────────────────────────────────────
+       PROPELLERADS CONVERSION POSTBACK
+       1. In Propeller: Tracking → copy your S2S postback URL.
+          It looks like:
+          https://ad.propellerads.com/conversion/postbackV2?aid=YOUR_AID&pid=&tid=YOUR_TID&visitor_id=${SUBID}
+       2. Paste it below, replacing YOUR_AID / YOUR_TID,
+          and keep ${SUBID} replaced by the stored clickid (done for you).
+       3. Make sure your Propeller campaign URL includes ?clickid=${SUBID}
+          so index.html can capture it.
+       ─────────────────────────────────────────────── -->
   <script>
-    setTimeout(function() {
-      window.location.href = "https://afflat3e1.com/trk/lnk/0333AF69-53A4-4060-B664-61FBCC429F4E/?o=24725&c=918277&a=780205&k=6C429903C034D434CB30EFBDFB16098C&l=25813";
-    }, 4000);
-  </script>
+    (function () {
+      var cid = null;
+      try { cid = sessionStorage.getItem('pa_clickid'); } catch (e) {}
+      if (!cid) return;
 
+      var postback = 'https://ad.propellerads.com/conversion/postbackV2'
+        + '?aid=YOUR_AID'
+        + '&pid='
+        + '&tid=YOUR_TID'
+        + '&visitor_id=' + encodeURIComponent(cid);
+
+      // Fire as an image request — works on static hosting, no server needed
+      var img = new Image();
+      img.src = postback;
+
+      // Prevent double-firing if the user refreshes
+      try { sessionStorage.removeItem('pa_clickid'); } catch (e) {}
+    })();
+  </script>
 </body>
 </html>
