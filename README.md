@@ -1,2 +1,2 @@
 # dailyclaimit
-Free Prizes DAILY! Sign up for Emails for Exclusives!
+Free Prizes DAILY! Sign up and Get Exclusives!
