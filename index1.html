@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "x5jpoxfkam");
+</script>
+  <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Makeup Testers Wanted — Claim Your Free Kit</title>
+  <meta name="description" content="Full-size makeup kits are going to product testers in your area. No purchase required. See if you qualify." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blush-1: #FDEFF3;
+      --blush-2: #F8D6E0;
+      --blush-card: #FCE4EC;
+      --ink: #1C1419;
+      --rose: #E2638C;
+      --rose-deep: #C04A72;
+      --wine: #722441;
+      --kraft: #C8956C;
+      --gold: #E8B563;
+      --white: #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(165deg, var(--blush-1) 0%, var(--blush-2) 100%);
+      color: var(--wine);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .confetti i {
+      position: absolute;
+      border-radius: 50%;
+      opacity: .55;
+    }
+
+    .page { position: relative; z-index: 1; }
+
+    .header {
+      padding: 18px 24px 6px;
+      text-align: center;
+    }
+    .header-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: var(--ink);
+    }
+    .header-logo em {
+      font-style: italic;
+      color: var(--rose-deep);
+    }
+
+    .hero {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 24px 8px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--rose-deep);
+      margin-bottom: 14px;
+    }
+    .eyebrow::before {
+      content: "✦";
+      margin-right: 8px;
+      color: var(--gold);
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      color: var(--ink);
+      font-size: clamp(42px, 6.5vw, 72px);
+      line-height: 1.04;
+      letter-spacing: -0.01em;
+      margin-bottom: 18px;
+    }
+    .hero h1 .w-bold   { font-weight: 800; display: block; }
+    .hero h1 .w-light  { font-weight: 400; display: block; }
+    .hero h1 .w-italic { font-weight: 400; font-style: italic; display: block; color: var(--rose-deep); }
+
+    .hero .lede {
+      font-size: 16.5px;
+      line-height: 1.7;
+      max-width: 400px;
+      margin-bottom: 26px;
+    }
+    .hero .lede strong { color: var(--ink); font-weight: 600; }
+
+    .cta-btn {
+      display: inline-block;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 16px 38px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #FBD0DD 0%, #F2A8BF 55%, #E98BAB 100%);
+      box-shadow:
+        inset 0 2px 3px rgba(255,255,255,.9),
+        inset 0 -3px 6px rgba(160,60,95,.25),
+        0 8px 22px rgba(190,80,120,.30);
+      transition: transform .15s ease, box-shadow .15s ease;
+      position: relative;
+    }
+    .cta-btn::after {
+      content: "";
+      position: absolute;
+      top: 5px; left: 14%; right: 14%;
+      height: 38%;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,0));
+      pointer-events: none;
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: inset 0 2px 3px rgba(255,255,255,.9), inset 0 -3px 6px rgba(160,60,95,.25), 0 12px 26px rgba(190,80,120,.38); }
+    .cta-btn:focus-visible { outline: 3px solid var(--rose-deep); outline-offset: 3px; }
+
+    .hero-disclaim {
+      margin-top: 14px;
+      font-size: 11.5px;
+      color: #A66983;
+    }
+
+    .hero-visual { text-align: center; }
+    .hero-visual svg {
+      width: min(100%, 360px);
+      height: auto;
+      filter: drop-shadow(0 18px 30px rgba(150,60,95,.18));
+    }
+
+    .trust {
+      max-width: 760px;
+      margin: 34px auto 0;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .trust div {
+      background: rgba(255,255,255,.65);
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 14px;
+      padding: 14px 12px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--wine);
+      backdrop-filter: blur(4px);
+    }
+    .trust div b {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+
+    .form-section {
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 44px 24px 56px;
+    }
+    .form-card {
+      background: var(--white);
+      border-radius: 22px;
+      padding: 38px 34px 34px;
+      box-shadow: 0 24px 60px rgba(170,70,105,.16);
+      position: relative;
+    }
+    .form-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 34px; right: 34px;
+      height: 4px;
+      border-radius: 0 0 6px 6px;
+      background: linear-gradient(90deg, var(--gold), var(--rose), var(--gold));
+    }
+    .form-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: 27px;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .form-card .subtext {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 26px;
+    }
+
+    /* ── Custom form styles ── */
+    .claim-form .field-group {
+      margin-bottom: 14px;
+    }
+    .claim-form label {
+      display: block;
+      color: var(--wine);
+      font-family: 'Inter', sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      margin-bottom: 5px;
+    }
+    .claim-form input {
+      width: 100%;
+      background-color: #FDF3F6;
+      border: 1.5px solid #F3C3D3;
+      border-radius: 10px;
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      padding: 13px 15px;
+      transition: border-color .15s ease;
+      outline: none;
+    }
+    .claim-form input:focus {
+      border-color: var(--rose);
+    }
+    .claim-form input::placeholder { color: #DDA2B6; }
+
+    .submit-btn {
+      width: 100%;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 19px;
+      color: var(--ink);
+      padding: 15px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(180deg, #FBD0DD 0%, #F2A8BF 55%, #E98BAB 100%);
+      box-shadow: inset 0 2px 3px rgba(255,255,255,.9), inset 0 -3px 6px rgba(160,60,95,.25), 0 8px 22px rgba(190,80,120,.30);
+      transition: transform .15s ease;
+      margin-top: 6px;
+    }
+    .submit-btn:hover { transform: translateY(-2px); }
+    .submit-btn:disabled { opacity: .7; cursor: not-allowed; transform: none; }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 12px 0;
+    }
+    .form-success h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      color: var(--ink);
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+    .form-success p {
+      color: var(--wine);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .form-privacy {
+      margin-top: 16px;
+      font-size: 11.5px;
+      line-height: 1.55;
+      color: #A66983;
+      text-align: center;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 26px 24px 34px;
+      font-size: 11px;
+      line-height: 1.7;
+      color: #A66983;
+    }
+    .footer a { color: var(--rose-deep); text-decoration: none; }
+
+    @media (max-width: 720px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 28px;
+      }
+      .hero .lede { margin-left: auto; margin-right: auto; }
+      .hero-visual { order: -1; }
+      .hero-visual svg { width: min(72%, 280px); }
+      .trust { grid-template-columns: 1fr; max-width: 380px; }
+      .form-card { padding: 30px 22px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="confetti" aria-hidden="true">
+    <i style="top:12%; left:6%;  width:7px; height:7px; background:#E8B563;"></i>
+    <i style="top:30%; left:92%; width:5px; height:5px; background:#E8B563;"></i>
+    <i style="top:64%; left:4%;  width:5px; height:5px; background:#F2A8BF;"></i>
+    <i style="top:78%; left:88%; width:8px; height:8px; background:#E8B563; opacity:.35;"></i>
+    <i style="top:48%; left:96%; width:4px; height:4px; background:#F2A8BF;"></i>
+    <i style="top:88%; left:14%; width:4px; height:4px; background:#E8B563;"></i>
+    <i style="top:8%;  left:78%; width:4px; height:4px; background:#F2A8BF;"></i>
+  </div>
+
+  <div class="page">
+
+    <header class="header">
+      <div class="header-logo">daily<em>claim</em>it</div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-text">
+        <div class="eyebrow">Limited spots · <span id="city-eyebrow">Your Area</span></div>
+        <h1>
+          <span class="w-bold">Makeup</span>
+          <span class="w-light">Testers</span>
+          <span class="w-italic">Wanted</span>
+        </h1>
+        <p class="lede">Full-size kits — lipstick, blush, foundation and more — are going out to <strong>product testers <span id="city-inline">near you</span></strong>. No purchase required. Just tell us where to send the details.</p>
+        <a class="cta-btn" href="#claim">See if You Qualify</a>
+        <p class="hero-disclaim">Participation required. See offer terms.</p>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 360 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="190" cy="240" rx="140" ry="26" fill="#E89BB5" opacity="0.25"/>
+          <g transform="rotate(-8 190 190)">
+            <rect x="100" y="120" width="190" height="140" rx="10" fill="#C8956C"/>
+            <rect x="100" y="120" width="190" height="36" rx="10" fill="#B07D55"/>
+            <path d="M100 130 L60 86 L150 96 L132 128 Z" fill="#D6A87E"/>
+            <path d="M290 130 L334 92 L246 98 L262 128 Z" fill="#BE8A60"/>
+            <path d="M115 128 Q150 96 195 122 Q240 94 278 126 L272 142 Q230 120 196 140 Q158 116 122 142 Z" fill="#F8CCDA"/>
+          </g>
+          <g transform="rotate(14 185 110)">
+            <rect x="178" y="34" width="17" height="92" rx="8.5" fill="#23211F"/>
+            <rect x="181" y="24" width="11" height="18" rx="5" fill="#D9A968"/>
+          </g>
+          <g transform="rotate(26 232 130)">
+            <rect x="225" y="74" width="15" height="64" rx="7" fill="#C8896A"/>
+            <path d="M227 74 Q232.5 60 238 74 Z" fill="#BD7C5C"/>
+          </g>
+          <g transform="rotate(38 262 150)">
+            <rect x="255" y="104" width="14" height="56" rx="7" fill="#D9A28C"/>
+            <path d="M257 104 Q262 92 267 104 Z" fill="#CC937C"/>
+          </g>
+          <g>
+            <rect x="276" y="170" width="30" height="78" rx="13" fill="#E8C4AE"/>
+            <rect x="276" y="170" width="30" height="78" rx="13" fill="url(#fgrad)"/>
+            <rect x="284" y="150" width="14" height="24" rx="3" fill="#D8D8D6"/>
+            <rect x="287" y="142" width="8" height="12" rx="2" fill="#BFBFBD"/>
+          </g>
+          <defs>
+            <linearGradient id="fgrad" x1="276" y1="170" x2="306" y2="248">
+              <stop offset="0" stop-color="#F2D6C2"/>
+              <stop offset="1" stop-color="#D9A98C"/>
+            </linearGradient>
+          </defs>
+          <g transform="rotate(-6 110 252)">
+            <ellipse cx="110" cy="252" rx="44" ry="36" fill="#F6E9E2"/>
+            <ellipse cx="110" cy="250" rx="32" ry="25" fill="#F0997B"/>
+            <ellipse cx="102" cy="244" rx="12" ry="8" fill="#F5B093" opacity=".8"/>
+          </g>
+          <circle cx="64"  cy="60"  r="4"   fill="#E8B563" opacity=".8"/>
+          <circle cx="318" cy="64"  r="3"   fill="#E8B563" opacity=".7"/>
+          <circle cx="338" cy="180" r="3.5" fill="#F2A8BF"/>
+          <circle cx="40"  cy="170" r="3"   fill="#F2A8BF" opacity=".8"/>
+          <circle cx="300" cy="280" r="3"   fill="#E8B563" opacity=".6"/>
+          <circle cx="58"  cy="288" r="2.5" fill="#E8B563" opacity=".6"/>
+          <circle cx="150" cy="36"  r="2.5" fill="#F2A8BF" opacity=".7"/>
+          <path d="M330 130 l3 6 -6 0 Z" fill="#E8B563" opacity=".6"/>
+          <path d="M84 110 l3 6 -6 0 Z" fill="#F2A8BF" opacity=".7"/>
+        </svg>
+      </div>
+    </section>
+
+    <section class="trust">
+      <div><b>Full-Size Kits</b>Not samples — real, usable products</div>
+      <div><b>Free Shipping</b>No purchase or card required to apply</div>
+      <div><b>Private &amp; Secure</b>Your info is never sold to third parties</div>
+    </section>
+
+    <section class="form-section" id="claim">
+      <div class="form-card">
+        <h2>Claim your tester spot</h2>
+        <p class="subtext">Enter your details below — we'll confirm availability in your area and email your kit details.</p>
+
+        <form class="claim-form" id="claimForm">
+          <div class="field-group">
+            <label for="firstName">First name</label>
+            <input type="text" id="firstName" name="firstName" placeholder="Jane" required autocomplete="given-name" />
+          </div>
+          <div class="field-group">
+            <label for="lastName">Last name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Smith" autocomplete="family-name" />
+          </div>
+          <div class="field-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="jane@email.com" required autocomplete="email" />
+          </div>
+          <div class="field-group">
+            <label for="zip">ZIP code</label>
+            <input type="text" id="zip" name="zip" placeholder="12345" maxlength="10" inputmode="numeric" autocomplete="postal-code" />
+          </div>
+          <button type="submit" class="submit-btn" id="submitBtn">See if I Qualify →</button>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+          <h4>You're in! ✨</h4>
+          <p>Taking you to your kit details...</p>
+        </div>
+
+        <p class="form-privacy">By submitting, you agree to receive email communications from DailyClaimIt. Unsubscribe at any time. We never sell your information.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>&copy; 2026 DailyClaimIt &nbsp;|&nbsp; <a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Terms</a> &nbsp;|&nbsp; <a href="#">Contact</a></p>
+      <p>This site is not sponsored by or affiliated with any cosmetics brand shown. Participation in the offer may be required to receive a kit. See offer terms for full details.</p>
+    </footer>
+
+  </div>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var city = (params.get('city') || '').trim();
+      if (city && /^[a-zA-Z .'-]{2,40}$/.test(city)) {
+        city = city.replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+        document.getElementById('city-eyebrow').textContent = city;
+        document.getElementById('city-inline').textContent = 'in ' + city;
+      }
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var cid = params.get('clickid') || params.get('subid') || params.get('visitor_id');
+      if (cid) {
+        try { sessionStorage.setItem('pa_clickid', cid); } catch (e) {}
+      }
+    })();
+  </script>
+
+  <script>
+    var SHEET_URL = 'https://script.google.com/macros/s/AKfycbywd9E3ZbITD8GDh52bN2wPxH3o4_x3LEgNp1fmaM82-icEr6JwSIlTg9VD-5GkVMlooQ/exec';
+    var REDIRECT_URL = 'thank-you.html';
+
+    document.getElementById('claimForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+
+      var payload = {
+        firstName: document.getElementById('firstName').value,
+        lastName:  document.getElementById('lastName').value,
+        email:     document.getElementById('email').value,
+        zip:       document.getElementById('zip').value
+      };
+
+      fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).finally(function () {
+        document.getElementById('claimForm').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+        setTimeout(function () {
+          window.location.href = REDIRECT_URL;
+        }, 1200);
+      });
+    });
+  </script>
+
+</body>
+</html>
