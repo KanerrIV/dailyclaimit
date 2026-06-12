@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "x5jpoxfkam");
-  </script>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Makeup Testers Wanted — Claim Your Free Kit</title>
-  <meta name="description" content="Full-size makeup kits are going to product testers in your area. No purchase required. See if you qualify." />
+  <meta name="description" content="Full-size makeup kits are going out to product testers in your area. No purchase required. See if you qualify." />
 
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- Preconnect for fonts (non-blocking) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Non-render-blocking font load -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&family=Inter:wght@400;500;600&display=swap" /></noscript>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -156,7 +154,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 0 0 rgba(226,99,140,0.4);
     }
 
     .radar-ring {
@@ -613,7 +610,9 @@
 
   </div>
 
-  <!-- SCRIPTS -->
+  <!-- ALL SCRIPTS deferred — moved to bottom, consolidated -->
+  <script defer src="https://www.clarity.ms/tag/x5jpoxfkam"></script>
+
   <script>
     // ── City token from URL ──
     (function () {
@@ -630,45 +629,35 @@
         var qualEl = document.getElementById('city-qualified');
         if (qualEl) qualEl.textContent = 'in ' + city;
       }
-    })();
-  </script>
 
-  <script>
-    // ── Click ID capture ──
-    (function () {
-      var params = new URLSearchParams(window.location.search);
+      // ── Click ID capture ──
       var cid = params.get('clickid') || params.get('subid') || params.get('visitor_id');
       if (cid) {
         try { sessionStorage.setItem('pa_clickid', cid); } catch (e) {}
       }
     })();
-  </script>
 
-  <script>
-    // ── Floating Brushes ──
-    (function () {
+    // ── Floating Brushes — deferred until after page paint ──
+    window.addEventListener('load', function () {
       var brushField = document.getElementById('brushField');
       var emojis = ['💄', '💋', '✨', '🪄', '💅', '🌸', '💗', '👄'];
-      var count = 18;
+      var count = 12; // reduced from 18
+      var frag = document.createDocumentFragment();
 
       for (var i = 0; i < count; i++) {
         var el = document.createElement('span');
         el.className = 'brush';
         el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        var leftPct = Math.random() * 100;
-        var duration = 5 + Math.random() * 8;
-        var delay = Math.random() * 10;
-        var size = 18 + Math.floor(Math.random() * 20);
-        el.style.left = leftPct + '%';
-        el.style.fontSize = size + 'px';
-        el.style.animationDuration = duration + 's';
-        el.style.animationDelay = delay + 's';
-        brushField.appendChild(el);
+        el.style.cssText =
+          'left:' + (Math.random() * 100) + '%;' +
+          'font-size:' + (18 + Math.floor(Math.random() * 20)) + 'px;' +
+          'animation-duration:' + (5 + Math.random() * 8) + 's;' +
+          'animation-delay:' + (Math.random() * 10) + 's;';
+        frag.appendChild(el);
       }
-    })();
-  </script>
+      brushField.appendChild(frag);
+    });
 
-  <script>
     // ── Scan sequence ──
     (function () {
       var steps = [
@@ -682,7 +671,6 @@
       var progressLabel = document.getElementById('progressLabel');
 
       steps.forEach(function (step, i) {
-        // Reveal item
         setTimeout(function () {
           var item = document.querySelector('[data-step="' + i + '"]');
           if (item) item.classList.add('visible');
@@ -690,8 +678,6 @@
           progressLabel.textContent = step.label;
         }, step.delay);
 
-        // Tick item as done
-        var tickDelay = step.delay + 900;
         setTimeout(function (idx) {
           return function () {
             var icon = document.getElementById('icon-' + idx);
@@ -701,21 +687,18 @@
               icon.classList.add('done');
             }
           };
-        }(i), tickDelay);
+        }(i), step.delay + 900);
       });
 
-      // Final reveal
       setTimeout(function () {
         progressBar.style.width = '100%';
         progressLabel.textContent = 'Complete!';
 
         setTimeout(function () {
-          // Swap states
           document.getElementById('scanningState').style.display = 'none';
           var qs = document.getElementById('qualifiedState');
           qs.style.display = 'block';
 
-          // CTA redirect: append click ID if present
           try {
             var cid = sessionStorage.getItem('pa_clickid');
             var btn = document.getElementById('ctaBtn');
@@ -726,43 +709,35 @@
             }
           } catch (e) {}
 
-          // Confetti burst
           launchConfetti();
         }, 500);
 
       }, 5800);
-
     })();
-  </script>
 
-  <script>
     // ── Confetti Burst ──
     function launchConfetti() {
       var burst = document.getElementById('confettiBurst');
       burst.classList.add('active');
 
       var colors = ['#E8B563', '#F2A8BF', '#E2638C', '#C04A72', '#FDEFF3', '#fff'];
-      var pieceCount = 80;
+      var frag = document.createDocumentFragment();
 
-      for (var i = 0; i < pieceCount; i++) {
+      for (var i = 0; i < 80; i++) {
         var p = document.createElement('div');
-        p.className = 'conf-piece';
-        var x = 20 + Math.random() * 60;
         var size = 6 + Math.random() * 10;
-        var color = colors[Math.floor(Math.random() * colors.length)];
         var dur = 1.2 + Math.random() * 1.8;
-        var delay = Math.random() * 0.6;
-        var rotate = Math.random() > 0.5 ? 'rotate' : '';
+        p.className = 'conf-piece';
         p.style.cssText =
-          'left:' + x + '%;' +
+          'left:' + (20 + Math.random() * 60) + '%;' +
           'top:30%;' +
-          'width:' + size + 'px;' +
-          'height:' + size + 'px;' +
-          'background:' + color + ';' +
+          'width:' + size + 'px;height:' + size + 'px;' +
+          'background:' + colors[Math.floor(Math.random() * colors.length)] + ';' +
           'border-radius:' + (Math.random() > 0.5 ? '50%' : '2px') + ';' +
-          'animation:confettiFly ' + dur + 's ' + delay + 's ease-in both;';
-        burst.appendChild(p);
+          'animation:confettiFly ' + dur + 's ' + (Math.random() * 0.6) + 's ease-in both;';
+        frag.appendChild(p);
       }
+      burst.appendChild(frag);
 
       setTimeout(function () {
         burst.classList.remove('active');
