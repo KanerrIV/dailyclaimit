@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
-    <script type="text/javascript">
+<head>
+  <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "x5jpoxfkam");
-</script>
+  </script>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,10 +29,12 @@
       --rose-deep: #C04A72;
       --wine: #722441;
       --gold: #E8B563;
+      --gold-light: #F9E4B7;
       --white: #FFFFFF;
     }
 
     html { scroll-behavior: smooth; }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -46,42 +48,89 @@
       overflow-x: hidden;
     }
 
-    .confetti {
-      position: fixed; inset: 0;
-      pointer-events: none; z-index: 0;
-    }
-    .confetti i {
-      position: absolute; border-radius: 50%; opacity: .55;
+    /* ── FLOATING BRUSHES ── */
+    .brush-field {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
     }
 
+    .brush {
+      position: absolute;
+      top: -120px;
+      font-size: 28px;
+      opacity: 0;
+      animation: brushFall linear infinite;
+      will-change: transform, opacity;
+    }
+
+    @keyframes brushFall {
+      0%   { transform: translateY(0) rotate(0deg);   opacity: 0; }
+      8%   { opacity: 0.7; }
+      90%  { opacity: 0.5; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ── CONFETTI BURST ── */
+    .confetti-burst {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 99;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .confetti-burst.active { opacity: 1; }
+
+    .conf-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      opacity: 0;
+    }
+
+    @keyframes confettiFly {
+      0%   { transform: translateY(0) rotate(0deg) scale(1);   opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg) scale(0.3); opacity: 0; }
+    }
+
+    /* ── PAGE WRAPPER ── */
     .page { position: relative; z-index: 1; }
 
     /* ── HEADER ── */
     .header {
-      padding: 18px 24px 0;
+      padding: 22px 24px 0;
       text-align: center;
     }
     .header-logo {
       font-family: 'Playfair Display', serif;
-      font-size: 19px; font-weight: 600;
+      font-size: 20px; font-weight: 600;
       letter-spacing: .04em; color: var(--ink);
     }
     .header-logo em { font-style: italic; color: var(--rose-deep); }
 
-    /* ── FORM — top of page ── */
-    .form-section {
-      max-width: 480px;
-      margin: 20px auto 0;
+    /* ── SCAN CARD ── */
+    .scan-section {
+      max-width: 500px;
+      margin: 32px auto 0;
       padding: 0 24px;
     }
-    .form-card {
+
+    .scan-card {
       background: var(--white);
-      border-radius: 22px;
-      padding: 32px 30px 28px;
-      box-shadow: 0 24px 60px rgba(170,70,105,.16);
+      border-radius: 24px;
+      padding: 38px 34px 34px;
+      box-shadow: 0 28px 70px rgba(170,70,105,.18);
       position: relative;
+      text-align: center;
+      overflow: hidden;
     }
-    .form-card::before {
+
+    .scan-card::before {
       content: "";
       position: absolute;
       top: 0; left: 28px; right: 28px;
@@ -89,66 +138,244 @@
       border-radius: 0 0 6px 6px;
       background: linear-gradient(90deg, var(--gold), var(--rose), var(--gold));
     }
-    .form-card h2 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 800; font-size: 26px;
-      color: var(--ink); margin-bottom: 6px;
-    }
-    .form-card .subtext {
-      font-size: 13.5px; line-height: 1.6;
-      margin-bottom: 22px;
+
+    /* ── RADAR ANIMATION ── */
+    .radar-wrap {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 28px;
     }
 
-    .claim-form .field-group { margin-bottom: 12px; }
-    .claim-form label {
-      display: block; color: var(--wine);
-      font-size: 12px; font-weight: 600;
-      letter-spacing: .02em; margin-bottom: 4px;
+    .radar-base {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fce8f0 0%, #fad0df 60%, #f5b8cf 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 0 rgba(226,99,140,0.4);
     }
-    .claim-form input {
-      width: 100%;
-      background-color: #FDF3F6;
-      border: 1.5px solid #F3C3D3;
-      border-radius: 10px;
+
+    .radar-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid rgba(226,99,140,0.5);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      animation: radarPulse 2.4s ease-out infinite;
+    }
+    .radar-ring:nth-child(1) { width: 160px; height: 160px; animation-delay: 0s; }
+    .radar-ring:nth-child(2) { width: 160px; height: 160px; animation-delay: 0.8s; }
+    .radar-ring:nth-child(3) { width: 160px; height: 160px; animation-delay: 1.6s; }
+
+    @keyframes radarPulse {
+      0%   { transform: translate(-50%, -50%) scale(0.6); opacity: 0.8; border-color: rgba(226,99,140,0.6); }
+      100% { transform: translate(-50%, -50%) scale(2.0); opacity: 0;   border-color: rgba(226,99,140,0);   }
+    }
+
+    .radar-pin {
+      font-size: 36px;
+      position: relative;
+      z-index: 2;
+      animation: pinBounce 1.6s ease-in-out infinite;
+      filter: drop-shadow(0 4px 8px rgba(192,74,114,0.35));
+    }
+
+    @keyframes pinBounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-6px); }
+    }
+
+    /* ── STATUS STEPS ── */
+    .status-list {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 28px;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #fce8f0;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      font-size: 15px;
+      color: var(--wine);
+      font-weight: 500;
+    }
+    .status-item:last-child { border-bottom: none; }
+    .status-item.visible   { opacity: 1; transform: translateX(0); }
+
+    .status-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 14px;
+      transition: background 0.3s ease;
+    }
+
+    .status-icon.pending {
+      background: #fce8f0;
+      color: var(--rose);
+      animation: spinnerPulse 1s linear infinite;
+    }
+    .status-icon.done {
+      background: linear-gradient(135deg, var(--gold), #f5a623);
+      color: #fff;
+      animation: none;
+    }
+
+    @keyframes spinnerPulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.4; }
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-wrap {
+      background: #fce8f0;
+      border-radius: 99px;
+      height: 8px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--rose-deep), var(--gold));
+      border-radius: 99px;
+      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .progress-label {
+      font-size: 12px;
+      color: #A66983;
+      margin-bottom: 24px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── QUALIFIED STATE ── */
+    .qualified-state {
+      display: none;
+      text-align: center;
+      animation: qualifiedIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    @keyframes qualifiedIn {
+      0%   { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1);   opacity: 1; }
+    }
+
+    .qualified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--gold-light), #fde68a);
+      border: 2px solid var(--gold);
+      border-radius: 99px;
+      padding: 8px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #7a4f00;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(232,181,99,0.4);
+    }
+
+    .qualified-headline {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: 32px;
       color: var(--ink);
-      font-family: 'Inter', sans-serif;
-      font-size: 15px; padding: 12px 14px;
-      transition: border-color .15s ease;
-      outline: none;
+      line-height: 1.1;
+      margin-bottom: 10px;
     }
-    .claim-form input:focus { border-color: var(--rose); }
-    .claim-form input::placeholder { color: #DDA2B6; }
+    .qualified-headline em {
+      font-style: italic;
+      color: var(--rose-deep);
+    }
 
-    .submit-btn {
+    .qualified-sub {
+      font-size: 15px;
+      color: var(--wine);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .cta-btn {
+      display: inline-block;
       width: 100%;
       font-family: 'Playfair Display', serif;
-      font-weight: 700; font-size: 19px;
-      color: var(--ink); padding: 15px;
-      border-radius: 999px; border: none; cursor: pointer;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--ink);
+      padding: 17px 20px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
       background: linear-gradient(180deg, #FBD0DD 0%, #F2A8BF 55%, #E98BAB 100%);
-      box-shadow: inset 0 2px 3px rgba(255,255,255,.9), inset 0 -3px 6px rgba(160,60,95,.25), 0 8px 22px rgba(190,80,120,.30);
-      transition: transform .15s ease;
-      margin-top: 6px;
-    }
-    .submit-btn:hover { transform: translateY(-2px); }
-    .submit-btn:disabled { opacity: .7; cursor: not-allowed; transform: none; }
-
-    .form-success {
-      display: none; text-align: center; padding: 12px 0;
-    }
-    .form-success h4 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 800; color: var(--ink);
-      font-size: 24px; margin-bottom: 8px;
-    }
-    .form-success p { color: var(--wine); }
-
-    .form-privacy {
-      margin-top: 14px; font-size: 11px;
-      line-height: 1.55; color: #A66983; text-align: center;
+      box-shadow:
+        inset 0 2px 3px rgba(255,255,255,.9),
+        inset 0 -3px 6px rgba(160,60,95,.25),
+        0 10px 28px rgba(190,80,120,.35);
+      transition: transform .2s ease, box-shadow .2s ease;
+      animation: ctaPulse 2s ease-in-out infinite;
     }
 
-    /* ── HERO (below form) ── */
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        inset 0 2px 3px rgba(255,255,255,.9),
+        inset 0 -3px 6px rgba(160,60,95,.25),
+        0 16px 36px rgba(190,80,120,.45);
+    }
+
+    @keyframes ctaPulse {
+      0%, 100% { box-shadow: inset 0 2px 3px rgba(255,255,255,.9), inset 0 -3px 6px rgba(160,60,95,.25), 0 10px 28px rgba(190,80,120,.35); }
+      50%       { box-shadow: inset 0 2px 3px rgba(255,255,255,.9), inset 0 -3px 6px rgba(160,60,95,.25), 0 14px 40px rgba(190,80,120,.55); }
+    }
+
+    .cta-arrow {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+    .cta-btn:hover .cta-arrow { transform: translateX(4px); }
+
+    .spots-note {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #A66983;
+      font-weight: 500;
+    }
+    .spots-dot {
+      display: inline-block;
+      width: 7px; height: 7px;
+      background: #6fcf97;
+      border-radius: 50%;
+      margin-right: 5px;
+      animation: dotBlink 1.4s ease-in-out infinite;
+      vertical-align: middle;
+    }
+    @keyframes dotBlink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+
+    /* ── HERO ── */
     .hero {
       max-width: 960px;
       margin: 36px auto 0;
@@ -182,7 +409,6 @@
       max-width: 400px; margin-bottom: 10px;
     }
     .hero .lede strong { color: var(--ink); font-weight: 600; }
-
     .hero-disclaim { font-size: 11.5px; color: #A66983; }
 
     .hero-visual { text-align: center; }
@@ -206,13 +432,8 @@
       border-radius: 14px; padding: 14px 12px;
       text-align: center; font-size: 13px;
       font-weight: 500; color: var(--wine);
-      backdrop-filter: blur(4px);
     }
-    .trust div b {
-      display: block;
-      font-family: 'Playfair Display', serif;
-      font-size: 17px; color: var(--ink); margin-bottom: 3px;
-    }
+    .trust div b { display: block; margin-bottom: 4px; color: var(--ink); }
 
     /* ── FOOTER ── */
     .footer {
@@ -232,21 +453,20 @@
       .hero-visual { order: -1; }
       .hero-visual svg { width: min(72%, 280px); }
       .trust { grid-template-columns: 1fr; max-width: 380px; }
-      .form-card { padding: 26px 20px 24px; }
+      .scan-card { padding: 28px 22px 26px; }
+      .qualified-headline { font-size: 26px; }
+      .radar-wrap { width: 130px; height: 130px; }
+      .radar-base { width: 130px; height: 130px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="confetti" aria-hidden="true">
-    <i style="top:12%; left:6%;  width:7px; height:7px; background:#E8B563;"></i>
-    <i style="top:30%; left:92%; width:5px; height:5px; background:#E8B563;"></i>
-    <i style="top:64%; left:4%;  width:5px; height:5px; background:#F2A8BF;"></i>
-    <i style="top:78%; left:88%; width:8px; height:8px; background:#E8B563; opacity:.35;"></i>
-    <i style="top:48%; left:96%; width:4px; height:4px; background:#F2A8BF;"></i>
-    <i style="top:88%; left:14%; width:4px; height:4px; background:#E8B563;"></i>
-    <i style="top:8%;  left:78%; width:4px; height:4px; background:#F2A8BF;"></i>
-  </div>
+  <!-- FLOATING BRUSHES -->
+  <div class="brush-field" aria-hidden="true" id="brushField"></div>
+
+  <!-- CONFETTI BURST -->
+  <div class="confetti-burst" id="confettiBurst" aria-hidden="true"></div>
 
   <div class="page">
 
@@ -254,42 +474,67 @@
       <div class="header-logo">daily<em>claim</em>it</div>
     </header>
 
-    <!-- FORM — first thing after logo -->
-    <section class="form-section" id="claim">
-      <div class="form-card">
-        <h2>Claim your tester spot</h2>
-        <p class="subtext">Full-size kits are going out to product testers near you. Enter your details to see if you qualify.</p>
+    <!-- SCAN CARD -->
+    <section class="scan-section" id="claim">
+      <div class="scan-card">
 
-        <form class="claim-form" id="claimForm">
-          <div class="field-group">
-            <label for="firstName">First name</label>
-            <input type="text" id="firstName" name="firstName" placeholder="Jane" required autocomplete="given-name" />
+        <!-- SCANNING STATE -->
+        <div id="scanningState">
+          <div class="radar-wrap">
+            <div class="radar-base">
+              <div class="radar-ring"></div>
+              <div class="radar-ring"></div>
+              <div class="radar-ring"></div>
+              <span class="radar-pin">📍</span>
+            </div>
           </div>
-          <div class="field-group">
-            <label for="lastName">Last name</label>
-            <input type="text" id="lastName" name="lastName" placeholder="Smith" autocomplete="family-name" />
-          </div>
-          <div class="field-group">
-            <label for="email">Email address</label>
-            <input type="email" id="email" name="email" placeholder="jane@email.com" required autocomplete="email" />
-          </div>
-          <div class="field-group">
-            <label for="zip">ZIP code</label>
-            <input type="text" id="zip" name="zip" placeholder="12345" maxlength="10" inputmode="numeric" autocomplete="postal-code" />
-          </div>
-          <button type="submit" class="submit-btn" id="submitBtn">See if I Qualify →</button>
-        </form>
 
-        <div class="form-success" id="formSuccess">
-          <h4>You're in! ✨</h4>
-          <p>Taking you to your kit details...</p>
+          <ul class="status-list" id="statusList">
+            <li class="status-item" data-step="0">
+              <span class="status-icon pending" id="icon-0">⋯</span>
+              <span id="text-0">Detecting your location…</span>
+            </li>
+            <li class="status-item" data-step="1">
+              <span class="status-icon pending" id="icon-1">⋯</span>
+              <span id="text-1">Checking tester availability <span id="city-step">near you</span>…</span>
+            </li>
+            <li class="status-item" data-step="2">
+              <span class="status-icon pending" id="icon-2">⋯</span>
+              <span id="text-2">Verifying kit inventory…</span>
+            </li>
+            <li class="status-item" data-step="3">
+              <span class="status-icon pending" id="icon-3">⋯</span>
+              <span id="text-3">Confirming eligibility…</span>
+            </li>
+          </ul>
+
+          <div class="progress-wrap">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+          <p class="progress-label" id="progressLabel">Scanning your area…</p>
         </div>
 
-        <p class="form-privacy">By submitting, you agree to receive email communications from DailyClaimIt. Unsubscribe at any time. We never sell your information.</p>
+        <!-- QUALIFIED STATE -->
+        <div class="qualified-state" id="qualifiedState">
+          <div class="qualified-badge">
+            ✨ Congratulations ✨
+          </div>
+          <h2 class="qualified-headline">You <em>Qualify!</em></h2>
+          <p class="qualified-sub">A full-size makeup testing kit is available <strong id="city-qualified">in your area</strong>. Claim your spot before it's filled.</p>
+
+          <a href="https://tracking.dailyclaimit.com/offer" class="cta-btn" id="ctaBtn">
+            Claim My Free Kit <span class="cta-arrow">→</span>
+          </a>
+
+          <p class="spots-note">
+            <span class="spots-dot"></span>Spots still open near you — no purchase required
+          </p>
+        </div>
+
       </div>
     </section>
 
-    <!-- HERO — below form -->
+    <!-- HERO -->
     <section class="hero">
       <div class="hero-text">
         <div class="eyebrow">Limited spots · <span id="city-eyebrow">Your Area</span></div>
@@ -368,19 +613,28 @@
 
   </div>
 
+  <!-- SCRIPTS -->
   <script>
+    // ── City token from URL ──
     (function () {
       var params = new URLSearchParams(window.location.search);
       var city = (params.get('city') || '').trim();
       if (city && /^[a-zA-Z .'-]{2,40}$/.test(city)) {
         city = city.replace(/\b\w/g, function (c) { return c.toUpperCase(); });
-        document.getElementById('city-eyebrow').textContent = city;
-        document.getElementById('city-inline').textContent = 'in ' + city;
+        ['city-eyebrow', 'city-inline'].forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.textContent = (id === 'city-inline') ? 'in ' + city : city;
+        });
+        var stepEl = document.getElementById('city-step');
+        if (stepEl) stepEl.textContent = 'in ' + city;
+        var qualEl = document.getElementById('city-qualified');
+        if (qualEl) qualEl.textContent = 'in ' + city;
       }
     })();
   </script>
 
   <script>
+    // ── Click ID capture ──
     (function () {
       var params = new URLSearchParams(window.location.search);
       var cid = params.get('clickid') || params.get('subid') || params.get('visitor_id');
@@ -391,35 +645,130 @@
   </script>
 
   <script>
-    var SHEET_URL = 'https://script.google.com/macros/s/AKfycbzjpRn30UCjPBKDsbLghsCUyHKChwAzh_WWFb61u9ARwBX5Gm26mDK2uiIqDUK8UOeX2Q/exec';
-    var REDIRECT_URL = 'thank-you.html';
+    // ── Floating Brushes ──
+    (function () {
+      var brushField = document.getElementById('brushField');
+      var emojis = ['💄', '💋', '✨', '🪄', '💅', '🌸', '💗', '👄'];
+      var count = 18;
 
-    document.getElementById('claimForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      var btn = document.getElementById('submitBtn');
-      btn.disabled = true;
-      btn.textContent = 'Submitting...';
+      for (var i = 0; i < count; i++) {
+        var el = document.createElement('span');
+        el.className = 'brush';
+        el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        var leftPct = Math.random() * 100;
+        var duration = 5 + Math.random() * 8;
+        var delay = Math.random() * 10;
+        var size = 18 + Math.floor(Math.random() * 20);
+        el.style.left = leftPct + '%';
+        el.style.fontSize = size + 'px';
+        el.style.animationDuration = duration + 's';
+        el.style.animationDelay = delay + 's';
+        brushField.appendChild(el);
+      }
+    })();
+  </script>
 
-      var payload = {
-        firstName: document.getElementById('firstName').value,
-        lastName:  document.getElementById('lastName').value,
-        email:     document.getElementById('email').value,
-        zip:       document.getElementById('zip').value
-      };
+  <script>
+    // ── Scan sequence ──
+    (function () {
+      var steps = [
+        { delay: 600,  progress: 25,  label: 'Location detected…' },
+        { delay: 1800, progress: 52,  label: 'Checking availability…' },
+        { delay: 3200, progress: 78,  label: 'Verifying inventory…' },
+        { delay: 4400, progress: 95,  label: 'Confirming eligibility…' },
+      ];
 
-      fetch(SHEET_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).finally(function () {
-        document.getElementById('claimForm').style.display = 'none';
-        document.getElementById('formSuccess').style.display = 'block';
+      var progressBar = document.getElementById('progressBar');
+      var progressLabel = document.getElementById('progressLabel');
+
+      steps.forEach(function (step, i) {
+        // Reveal item
         setTimeout(function () {
-          window.location.href = REDIRECT_URL;
-        }, 1200);
+          var item = document.querySelector('[data-step="' + i + '"]');
+          if (item) item.classList.add('visible');
+          progressBar.style.width = step.progress + '%';
+          progressLabel.textContent = step.label;
+        }, step.delay);
+
+        // Tick item as done
+        var tickDelay = step.delay + 900;
+        setTimeout(function (idx) {
+          return function () {
+            var icon = document.getElementById('icon-' + idx);
+            if (icon) {
+              icon.textContent = '✓';
+              icon.classList.remove('pending');
+              icon.classList.add('done');
+            }
+          };
+        }(i), tickDelay);
       });
-    });
+
+      // Final reveal
+      setTimeout(function () {
+        progressBar.style.width = '100%';
+        progressLabel.textContent = 'Complete!';
+
+        setTimeout(function () {
+          // Swap states
+          document.getElementById('scanningState').style.display = 'none';
+          var qs = document.getElementById('qualifiedState');
+          qs.style.display = 'block';
+
+          // CTA redirect: append click ID if present
+          try {
+            var cid = sessionStorage.getItem('pa_clickid');
+            var btn = document.getElementById('ctaBtn');
+            if (cid && btn) {
+              var url = new URL(btn.href, window.location.href);
+              url.searchParams.set('clickid', cid);
+              btn.href = url.toString();
+            }
+          } catch (e) {}
+
+          // Confetti burst
+          launchConfetti();
+        }, 500);
+
+      }, 5800);
+
+    })();
+  </script>
+
+  <script>
+    // ── Confetti Burst ──
+    function launchConfetti() {
+      var burst = document.getElementById('confettiBurst');
+      burst.classList.add('active');
+
+      var colors = ['#E8B563', '#F2A8BF', '#E2638C', '#C04A72', '#FDEFF3', '#fff'];
+      var pieceCount = 80;
+
+      for (var i = 0; i < pieceCount; i++) {
+        var p = document.createElement('div');
+        p.className = 'conf-piece';
+        var x = 20 + Math.random() * 60;
+        var size = 6 + Math.random() * 10;
+        var color = colors[Math.floor(Math.random() * colors.length)];
+        var dur = 1.2 + Math.random() * 1.8;
+        var delay = Math.random() * 0.6;
+        var rotate = Math.random() > 0.5 ? 'rotate' : '';
+        p.style.cssText =
+          'left:' + x + '%;' +
+          'top:30%;' +
+          'width:' + size + 'px;' +
+          'height:' + size + 'px;' +
+          'background:' + color + ';' +
+          'border-radius:' + (Math.random() > 0.5 ? '50%' : '2px') + ';' +
+          'animation:confettiFly ' + dur + 's ' + delay + 's ease-in both;';
+        burst.appendChild(p);
+      }
+
+      setTimeout(function () {
+        burst.classList.remove('active');
+        burst.innerHTML = '';
+      }, 4000);
+    }
   </script>
 
 </body>
