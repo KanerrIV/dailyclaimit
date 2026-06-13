@@ -631,7 +631,7 @@
       }
 
       // ── Click ID capture ──
-      var cid = params.get('clickid') || params.get('subid') || params.get('visitor_id');
+      var cid = params.get('s1') || params.get('clickid') || params.get('subid') || params.get('visitor_id');
       if (cid) {
         try { sessionStorage.setItem('pa_clickid', cid); } catch (e) {}
       }
