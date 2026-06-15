@@ -519,7 +519,8 @@
           <h2 class="qualified-headline">You <em>Qualify!</em></h2>
           <p class="qualified-sub">A full-size makeup testing kit is available <strong id="city-qualified">in your area</strong>. Claim your spot before it's filled.</p>
 
-          <a href="https://afflat3e1.com/trk/lnk/0333AF69-53A4-4060-B664-61FBCC429F4E/?o=24725&c=918277&a=780205&k=44C450B916C58C347254CB11433AF027&l=25813" class="cta-btn" id="ctaBtn">
+          <!-- UPDATED: new affiliate link with s1=CLICKID placeholder; JS replaces CLICKID with real SubID -->
+          <a href="https://afflat3e3.com/trk/lnk/0333AF69-53A4-4060-B664-61FBCC429F4E/?o=24725&c=918277&a=780205&k=44C450B916C58C347254CB11433AF027&l=25813&s1=CLICKID" class="cta-btn" id="ctaBtn">
             Claim My Free Kit <span class="cta-arrow">→</span>
           </a>
 
@@ -631,6 +632,7 @@
       }
 
       // ── Click ID capture ──
+      // Reads s1 first to match PropellerAds campaign URL (?s1=${SUBID})
       var cid = params.get('s1') || params.get('clickid') || params.get('subid') || params.get('visitor_id');
       if (cid) {
         try { sessionStorage.setItem('pa_clickid', cid); } catch (e) {}
@@ -641,7 +643,7 @@
     window.addEventListener('load', function () {
       var brushField = document.getElementById('brushField');
       var emojis = ['💄', '💋', '✨', '🪄', '💅', '🌸', '💗', '👄'];
-      var count = 12; // reduced from 18
+      var count = 12;
       var frag = document.createDocumentFragment();
 
       for (var i = 0; i < count; i++) {
@@ -699,13 +701,17 @@
           var qs = document.getElementById('qualifiedState');
           qs.style.display = 'block';
 
+          // UPDATED: replace CLICKID placeholder with real SubID captured from ?s1= param
+          // Falls back gracefully (removes placeholder) if no SubID is present
           try {
             var cid = sessionStorage.getItem('pa_clickid');
             var btn = document.getElementById('ctaBtn');
-            if (cid && btn) {
-              var url = new URL(btn.href, window.location.href);
-              url.searchParams.set('clickid', cid);
-              btn.href = url.toString();
+            if (btn) {
+              if (cid) {
+                btn.href = btn.href.replace('CLICKID', encodeURIComponent(cid));
+              } else {
+                btn.href = btn.href.replace('s1=CLICKID', '');
+              }
             }
           } catch (e) {}
 
